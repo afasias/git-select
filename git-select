@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# version: 1.0 (22-10-2020)
+
+trap 'rm -f "$TMPFILE"' EXIT
+TMPFILE=$(mktemp) || exit 1
+
+BRANCHES=`git branch | sed 's/^./ /g' | awk '{print $1}'`
+
+CURRENT_BRANCH=`git branch --show-current`
+
+TAG_PARAMS=()
+for BRANCH in ${BRANCHES[@]}
+do
+	LABEL="${BRANCH}"
+	TAG_PARAMS=("${TAG_PARAMS} ${BRANCH} ${LABEL}")
+done
+
+dialog --no-tags --default-item $CURRENT_BRANCH --menu "Select branch to checkout:" 0 0 0 $TAG_PARAMS 2> $TMPFILE
+
+EXIT_VALUE=$?
+
+case $EXIT_VALUE in
+0)
+	CHOSEN_BRANCH=`cat $TMPFILE`
+	git checkout $CHOSEN_BRANCH
+esac
+

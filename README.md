@@ -13,7 +13,7 @@ $ sudo - su
 
 # Usage
 
-To use the command execute the following command in the working directory you want to clean up:
+To use the command execute the following command in the working directory in which you wish to switch branches:
 
 ```sh
 $ git select

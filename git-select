@@ -16,7 +16,7 @@ do
 	TAG_PARAMS=("${TAG_PARAMS} ${BRANCH} ${LABEL}")
 done
 
-dialog --no-tags --default-item $CURRENT_BRANCH --menu "Select branch to checkout:" 0 0 0 $TAG_PARAMS 2> $TMPFILE
+dialog --no-tags --ok-label "Check out" --extra-button --extra-label "Copy name" --default-item $CURRENT_BRANCH --menu "Select branch to checkout:" 0 0 0 $TAG_PARAMS 2> $TMPFILE
 
 EXIT_VALUE=$?
 
@@ -24,5 +24,9 @@ case $EXIT_VALUE in
 0)
 	CHOSEN_BRANCH=`cat $TMPFILE`
 	git checkout $CHOSEN_BRANCH
+	;;
+3)
+	cat $TMPFILE | pbcopy
+	;;
 esac
 

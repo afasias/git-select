@@ -1,6 +1,6 @@
 # git-select
 
-Displays a menu where you can select a branch to checkout.
+Displays a dialog from where you can select a branch to checkout or copy its name.
 
 # Installation
 
@@ -19,12 +19,12 @@ To use the command execute the following command in the working directory in whi
 $ git select
 ```
 
-Initially the current branch is pre-highlighted. Navigate to the desired branch using cursor keys and hit Enter to check out. To abort hit Escape or choose Cancel.
+Initially the current branch is pre-selected. Navigate to the desired branch using arrow keys and choose "Check out" to check it out. If you need to copy the branch name into the clipboard instead, then choose "Copy name". To close the dialog without any action hit Escape or choose "Cancel".
 
 # Dependencies
 
 This shell script depends on the following programs (besides git itself):
 
 * dialog (https://invisible-island.net/dialog/)
-* sed, awk
+* sed, awk, pbcopy
 
